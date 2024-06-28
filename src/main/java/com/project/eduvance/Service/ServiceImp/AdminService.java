@@ -29,13 +29,14 @@ public class AdminService implements AdminMethods {
     public Admin createAdmin(Admin admin) {
         String s = "AD";
         String t = String.valueOf(new Date().getTime()).substring(10, 13);
+       
         admin.setAdminId(s + UUID.randomUUID().toString().substring(0, 4) + t);
         Admin savedAdmin = adminRepo.save(admin);
         User user1 = new User(savedAdmin.getAdminId(), savedAdmin.getAdminEmail(), savedAdmin.getAdminPasswd());
         userRepo.save(user1);
         return savedAdmin;
     }
-
+  
     @Override
     public Admin getAdminById(String id) {
         Admin admin = adminRepo.findById(id).orElseThrow(
@@ -43,7 +44,7 @@ public class AdminService implements AdminMethods {
         );
         return admin;
     }
-
+  
     @Override
     public List<Admin> getAllAdmin() {
         List<Admin> admins = adminRepo.findAll();
