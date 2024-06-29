@@ -1,7 +1,7 @@
 package com.project.eduvance.Service;
 
 
-import com.project.eduvance.Entity.ApiResponse;
+import com.project.eduvance.Dto.ApiResponse;
 
 public interface UserMethods {
     ApiResponse login(String userid, String password);

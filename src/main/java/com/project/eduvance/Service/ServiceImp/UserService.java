@@ -2,7 +2,7 @@ package com.project.eduvance.Service.ServiceImp;
 
 
 import com.project.eduvance.Entity.Admin;
-import com.project.eduvance.Entity.ApiResponse;
+import com.project.eduvance.Dto.ApiResponse;
 import com.project.eduvance.Entity.User;
 import com.project.eduvance.Exception.ResourceNotFound;
 import com.project.eduvance.Repository.AdminRepo;

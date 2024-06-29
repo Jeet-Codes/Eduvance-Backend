@@ -1,5 +1,6 @@
-package com.project.eduvance.Entity;
+package com.project.eduvance.Dto;
 
+import com.project.eduvance.Entity.User;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 

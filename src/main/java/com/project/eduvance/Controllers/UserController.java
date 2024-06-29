@@ -1,7 +1,7 @@
 package com.project.eduvance.Controllers;
 
 
-import com.project.eduvance.Entity.ApiResponse;
+import com.project.eduvance.Dto.ApiResponse;
 import com.project.eduvance.Service.UserMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
