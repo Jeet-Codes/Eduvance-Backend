@@ -35,8 +35,8 @@ public class UserService implements UserMethods {
     public ApiResponse login(String userId, String password) {
         Optional<User> byUserIdAndUserPasswd = userRepo.findByUserIdAndUserPasswd(userId, password);
         if (byUserIdAndUserPasswd.isPresent()) {
-            ApiResponse loginSucessfully = new ApiResponse("login sucessfully", true, HttpStatus.ACCEPTED, byUserIdAndUserPasswd.get());
-            return loginSucessfully;
+            ApiResponse loginSuccessfully = new ApiResponse("login Successfully", true, HttpStatus.ACCEPTED, byUserIdAndUserPasswd.get());
+            return loginSuccessfully;
         }else {
             return new ApiResponse("login failed", false, HttpStatus.NOT_FOUND, null);
         }
@@ -45,7 +45,12 @@ public class UserService implements UserMethods {
     @Override
     public ApiResponse forgot(String email,String password) {
         Optional<User> byUserEmail = userRepo.findByUserEmail(email);
+        // OTP Verification
         if (byUserEmail.isPresent()) {
+
+
+
+
             User user = byUserEmail.get();
             user.setUserPasswd(password);
             User save = userRepo.save(user);
@@ -74,14 +79,12 @@ public class UserService implements UserMethods {
 //                find.setAdminPasswd(save.getUserPasswd());
 //                adminRepo.save(find);
 //            }
-            if(substring.equals("ST")) {
+            if(substring.equals("AD")) {
                 Admin find=adminRepo.findById(userId).orElseThrow(
                         ()->new ResourceNotFound("Admin","id",userId));
                 find.setAdminPasswd(save.getUserPasswd());
                 adminRepo.save(find);
             }
-
-
             return new ApiResponse("Updated Successfully", true, HttpStatus.ACCEPTED, save);
         } else {
             ApiResponse userNotPresent = ApiResponse.builder()
