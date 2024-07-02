@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/cutm/admin")
+@RequestMapping("/eduvance/admin")
 @AllArgsConstructor
 public class AdminController {
     private AdminMethods adminMethods;
