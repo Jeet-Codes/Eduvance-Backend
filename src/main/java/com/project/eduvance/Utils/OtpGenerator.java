@@ -14,7 +14,7 @@ public class OtpGenerator {
     }
 
 //    Testing the OTP Generator
-    public static void main(String[] args) {
-        System.out.println(generateOtp());
-    }
+//    public static void main(String[] args) {
+//        System.out.println(generateOtp());
+//    }
 }
