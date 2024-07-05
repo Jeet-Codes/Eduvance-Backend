@@ -94,4 +94,21 @@ public class UserService implements UserMethods {
             return userNotPresent;
         }
     }
+
+    @Override
+    public boolean userExists(String email) {
+        Optional<User> byUserEmail = userRepo.findByUserEmail(email);
+        if (byUserEmail.isPresent()) {
+            User user = byUserEmail.get();
+            String userId = user.getUserId();
+            String substring = userId.substring(0, 2);
+            if(substring.equals("AD")) {
+                Admin find=adminRepo.findById(userId).orElseThrow(
+                        ()->new ResourceNotFound("Admin","id",userId));
+
+                return !find.getAdminEmail().isBlank();
+            }
+        }
+        return false;
+    }
 }

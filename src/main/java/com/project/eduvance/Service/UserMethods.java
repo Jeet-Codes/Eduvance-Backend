@@ -7,4 +7,6 @@ public interface UserMethods {
     ApiResponse login(String userid, String password);
 
     ApiResponse forgot(String email, String password);
+
+    boolean userExists(String email);
 }
