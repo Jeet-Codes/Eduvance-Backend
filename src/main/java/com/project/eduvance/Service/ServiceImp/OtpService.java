@@ -7,7 +7,6 @@ import com.project.eduvance.Entity.Otp;
 import com.project.eduvance.Repository.OtpRepo;
 import com.project.eduvance.Utils.OtpGenerator;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +32,7 @@ public class OtpService {
                         .email(otpRequest.getEmail())
                         .otp(otp)
                         .createdAt(LocalDateTime.now())
-                        .expiredAt(LocalDateTime.now().plusMinutes(5))
+                        .expiredAt(LocalDateTime.now().plusMinutes(5)) // expired at
                 .build());
         emailService.sendSimpleMail(EmailDetails.builder()
                         .subject("DO NOT DISCLOSE!!")
