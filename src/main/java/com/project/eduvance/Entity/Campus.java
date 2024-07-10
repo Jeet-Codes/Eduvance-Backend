@@ -2,6 +2,7 @@ package com.project.eduvance.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,8 +22,8 @@ public class Campus {
     private String csId;
     private String csName;
 
-    @ManyToOne
-    private University university;
+//    @ManyToOne
+//    private University university;
 
     private Integer csESTD;
     private String csState;
@@ -32,5 +33,10 @@ public class Campus {
 
     @CreationTimestamp
     private LocalDateTime csDateOfJoin;
+
+    @Lob
+    private String unPhoto;
+
+
 
 }

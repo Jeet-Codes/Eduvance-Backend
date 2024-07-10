@@ -16,6 +16,7 @@ public class ApiResponse {
     private HttpStatus status;
     private User user;
 
+
     public ApiResponse(String message, HttpStatus status) {
         this.message = message;
         this.status = status;
