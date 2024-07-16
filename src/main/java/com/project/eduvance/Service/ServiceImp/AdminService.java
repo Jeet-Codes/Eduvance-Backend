@@ -32,7 +32,7 @@ public class AdminService implements AdminMethods {
        
         admin.setAdminId(s + UUID.randomUUID().toString().substring(0, 4) + t);
         Admin savedAdmin = adminRepo.save(admin);
-        User user1 = new User(savedAdmin.getAdminId(), savedAdmin.getAdminEmail(), savedAdmin.getAdminPasswd());
+        User user1 = new User(savedAdmin.getAdminId(), savedAdmin.getAdminName(), savedAdmin.getAdminEmail(), savedAdmin.getAdminPasswd());
         userRepo.save(user1);
         return savedAdmin;
     }

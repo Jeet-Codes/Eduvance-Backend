@@ -29,7 +29,7 @@ public class ManagementService implements ManagementMethods {
 
         Management storedManagement = managementRepo.save(management);
         User user=userRepo.save(
-                new User(storedManagement.getMtId(),storedManagement.getMtPasswd(),storedManagement.getMtPasswd())
+                new User(storedManagement.getMtId(),storedManagement.getMtName(),storedManagement.getMtPasswd(),storedManagement.getMtPasswd())
         );
         userRepo.save(user);
         return storedManagement;

@@ -13,6 +13,7 @@ import lombok.Setter;
 public class Admin {
     @Id
     private String adminId;
+    private String adminName;
     private String adminEmail;
     private String adminPasswd;
 }
