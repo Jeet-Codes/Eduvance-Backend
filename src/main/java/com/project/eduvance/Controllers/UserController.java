@@ -14,16 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserMethods userMethods;
-//    public ResponseEntity<?>loginUser(@RequestBody User user) {
-//        ApiResponse login = userMethods.login(user.getUserEmail(), user.getUserPasswd());
-//        return ResponseEntity.ok(login);
-//    }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestParam("username") String username,
+    public ResponseEntity<?>loginUser(@RequestParam("username") String username,
                                        @RequestParam("password") String password) {
-        System.out.println("In Login" + username + password);
-        return ResponseEntity.ok("Login Successful");
+        ApiResponse login = userMethods.login(username, password);
+        return ResponseEntity.ok(login);
     }
 
 
