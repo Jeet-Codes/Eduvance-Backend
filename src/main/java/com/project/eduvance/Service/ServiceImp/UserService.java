@@ -33,9 +33,9 @@ public class UserService implements UserMethods {
 
     @Override
     public ApiResponse login(String userId, String password) {
-        Optional<User> byUserIdAndUserPasswd = userRepo.findByUserIdAndUserPasswd(userId, password);
-        if (byUserIdAndUserPasswd.isPresent()) {
-            ApiResponse loginSuccessfully = new ApiResponse("login Successfully", true, HttpStatus.ACCEPTED, byUserIdAndUserPasswd.get());
+        User byUserIdAndUserPasswd = userRepo.findByUserIdAndUserPasswd(userId, password);
+        if (byUserIdAndUserPasswd != null) {
+            ApiResponse loginSuccessfully = new ApiResponse("login Successfully", true, HttpStatus.ACCEPTED, byUserIdAndUserPasswd);
             return loginSuccessfully;
         }else {
             return new ApiResponse("login failed", false, HttpStatus.NOT_FOUND, null);
