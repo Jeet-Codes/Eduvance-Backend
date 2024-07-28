@@ -1,24 +1,27 @@
 package com.project.eduvance.Service.ServiceImp;
 
 import com.project.eduvance.Dto.ApiResponse;
+import com.project.eduvance.Dto.IdName;
 import com.project.eduvance.Entity.University;
 import com.project.eduvance.Repository.UniversityRepo;
 import com.project.eduvance.Service.UniversityMethods;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 
 public class UniversityService implements UniversityMethods {
     @Autowired
-    UniversityRepo universityRepo;
+    private UniversityRepo universityRepo;
 
     @Override
     public University createUniversity(University university) {
@@ -58,6 +61,16 @@ public class UniversityService implements UniversityMethods {
         return universityRepo.findById(unId).orElseThrow(
                 () -> new RuntimeException("university not found" + unId)
         );
+    }
+
+    public List<IdName> getUniversityIds() {
+        List<University> results = universityRepo.findAll();
+//        System.out.println(results);
+        List<IdName> idNames = results.stream()
+                .map(result -> new IdName(result.getUnId(), result.getUnName()))
+                .collect(Collectors.toList());
+//        System.out.println(idNames.get(0).toString());
+        return idNames;
     }
 
     @Override

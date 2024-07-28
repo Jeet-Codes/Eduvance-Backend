@@ -1,5 +1,6 @@
 package com.project.eduvance.Controllers;
 
+import com.project.eduvance.Dto.IdName;
 import com.project.eduvance.Entity.University;
 import com.project.eduvance.Service.ServiceImp.UniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +34,15 @@ public class UniversityController {
         List<University> uns = universityService.getUniversities();
         return new ResponseEntity<>(uns, HttpStatus.FOUND);
     }
-
     @PutMapping("/{id}")
     public ResponseEntity<University> updateUniversity(@PathVariable String id,@RequestBody University un1) {
         University updatedUn = universityService.updateUniversity(id, un1);
         return new ResponseEntity<>(updatedUn, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/ids")
+    public List<IdName> getUniversityIdName() {
+        return universityService.getUniversityIds();
     }
 
     @DeleteMapping("/{id}")
