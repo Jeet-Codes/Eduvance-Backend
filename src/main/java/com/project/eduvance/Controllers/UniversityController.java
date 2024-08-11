@@ -26,18 +26,18 @@ public class UniversityController {
     @GetMapping("/{id}")
     public ResponseEntity<University> getUniversityById(@PathVariable String id) {
         University storedUn=universityService.getUniversity(id);
-        return new ResponseEntity<>(storedUn, HttpStatus.FOUND);
+        return new ResponseEntity<>(storedUn, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<List<University>> getUniversitys() {
         List<University> uns = universityService.getUniversities();
-        return new ResponseEntity<>(uns, HttpStatus.FOUND);
+        return new ResponseEntity<>(uns, HttpStatus.OK);
     }
     @PutMapping("/{id}")
     public ResponseEntity<University> updateUniversity(@PathVariable String id,@RequestBody University un1) {
         University updatedUn = universityService.updateUniversity(id, un1);
-        return new ResponseEntity<>(updatedUn, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(updatedUn, HttpStatus.OK);
     }
 
     @GetMapping("/ids")

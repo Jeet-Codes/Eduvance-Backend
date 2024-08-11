@@ -22,6 +22,7 @@ public class University {
     @Id
     private String unId;
     private String unName;
+    private String unESTD;
     private String unCountry;
     private String unState;
     private String unAddress;
