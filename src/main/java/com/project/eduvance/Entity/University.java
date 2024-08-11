@@ -10,7 +10,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 
-
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,20 +20,20 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class University {
     @Id
-    private String unId;
-    private String unName;
-    private String unESTD;
-    private String unCountry;
-    private String unState;
-    private String unAddress;
-    private String unPhone;
-    private String unLandlineNumber;
-    private String unFaxNumber;
+    private String Id;
+    private String Name;
+    private String ESTD;
+    private String Country;
+    private String State;
+    private String Address;
+    private String Phone;
+    private String LandlineNumber;
+    private String FaxNumber;
 
     @CreationTimestamp
-    private LocalDateTime unCreatedAt;
+    private LocalDate CreatedAt;
 
     @Lob
-    private String unPhoto;
+    private String Photo;
 
 }
