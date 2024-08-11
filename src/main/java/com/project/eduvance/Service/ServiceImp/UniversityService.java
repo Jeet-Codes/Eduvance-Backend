@@ -26,7 +26,10 @@ public class UniversityService implements UniversityMethods {
     public University createUniversity(University university) {
         String s = "UN";
         String t = String.valueOf(new Date().getTime()).substring(10, 13);
-        university.setId(s + UUID.randomUUID().toString().substring(0, 4) +t);
+        university.setUnId(s + UUID.randomUUID().toString().substring(0, 4) +t);
+
+        System.out.println(university);
+
         University storedUn = universityRepo.save(university);
         return storedUn;
     }
@@ -36,12 +39,12 @@ public class UniversityService implements UniversityMethods {
         University storedUn = universityRepo.findById(unId).orElseThrow(
                 () -> new RuntimeException("university not found" + unId)
         );
-        storedUn.setName(university.getName());
-        storedUn.setAddress(university.getAddress());
-        storedUn.setPhone(university.getPhone());;
-        storedUn.setFaxNumber(university.getFaxNumber());
-        storedUn.setPhoto(university.getPhoto());
-        storedUn.setLandlineNumber(university.getLandlineNumber());
+        storedUn.setUnName(university.getUnName());
+        storedUn.setUnAddress(university.getUnAddress());
+        storedUn.setUnPhone(university.getUnPhone());;
+        storedUn.setUnFaxNumber(university.getUnFaxNumber());
+        storedUn.setUnPhoto(university.getUnPhoto());
+        storedUn.setUnLandlineNumber(university.getUnLandlineNumber());
         return universityRepo.save(storedUn);
     }
 
@@ -66,7 +69,7 @@ public class UniversityService implements UniversityMethods {
         List<University> results = universityRepo.findAll();
 //        System.out.println(results);
         List<IdName> idNames = results.stream()
-                .map(result -> new IdName(result.getId(), result.getName()))
+                .map(result -> new IdName(result.getUnId(), result.getUnName()))
                 .collect(Collectors.toList());
 //        System.out.println(idNames.get(0).toString());
         return idNames;

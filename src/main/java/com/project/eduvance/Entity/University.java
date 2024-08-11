@@ -3,10 +3,7 @@ package com.project.eduvance.Entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 
@@ -18,22 +15,23 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class University {
     @Id
-    private String Id;
-    private String Name;
-    private String ESTD;
-    private String Country;
-    private String State;
-    private String Address;
-    private String Phone;
-    private String LandlineNumber;
-    private String FaxNumber;
+    private String unId;
+    private String unName;
+    private String unESTD;
+    private String unCountry;
+    private String unState;
+    private String unAddress;
+    private String unPhone;
+    private String unLandlineNumber;
+    private String unFaxNumber;
 
     @CreationTimestamp
-    private LocalDate CreatedAt;
+    private LocalDate unCreatedAt;
 
     @Lob
-    private String Photo;
+    private String unPhoto;
 
 }
