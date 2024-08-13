@@ -1,5 +1,6 @@
 package com.project.eduvance.Controllers;
 
+import com.project.eduvance.Dto.CampusDto;
 import com.project.eduvance.Entity.Campus;
 import com.project.eduvance.Service.ServiceImp.CampusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class CampusController {
     private CampusService campusService;
 
     @PostMapping
-    public ResponseEntity<Campus> addCampus(@RequestBody Campus campus) {
+    public ResponseEntity<Campus> addCampus(@RequestBody CampusDto campus) {
         Campus createcampus=campusService.createCampus(campus);
         return new ResponseEntity<>(createcampus, HttpStatus.CREATED);
     }

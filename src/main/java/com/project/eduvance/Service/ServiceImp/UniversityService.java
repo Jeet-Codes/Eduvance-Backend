@@ -25,7 +25,7 @@ public class UniversityService implements UniversityMethods {
     @Override
     public University createUniversity(University university) {
         String s = "UN";
-        String t = String.valueOf(new Date().getTime()).substring(10, 13);
+        String t = String.valueOf(new Date().getTime()).substring(10, 13).toUpperCase();
         university.setUnId(s + UUID.randomUUID().toString().substring(0, 4) +t);
 
         System.out.println(university);

@@ -1,8 +1,7 @@
 package com.project.eduvance.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,12 +23,14 @@ public class Management {
     private String mtPhone;
     private String mtGender;
     private String mtBloodGrup;
-    @Lob
-    private String unPhoto;
+    private String mtPhoto;
     private LocalDate dateCreated;
 
-    private String csId;
 
-    private String unId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "campus_id")
+    @JsonIgnore
+    private Campus campus;
+
 
 }

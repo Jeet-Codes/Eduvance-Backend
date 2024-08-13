@@ -1,7 +1,11 @@
 package com.project.eduvance.Service.ServiceImp;
 
+import com.project.eduvance.Dto.ManagementDto;
+import com.project.eduvance.Entity.Campus;
 import com.project.eduvance.Entity.Management;
 import com.project.eduvance.Entity.User;
+import com.project.eduvance.Exception.ResourceNotFound;
+import com.project.eduvance.Repository.CampusRepo;
 import com.project.eduvance.Repository.ManagementRepo;
 import com.project.eduvance.Repository.UserRepo;
 import com.project.eduvance.Service.ManagementMethods;
@@ -21,17 +25,32 @@ public class ManagementService implements ManagementMethods {
     @Autowired
     private UserRepo userRepo;
 
-    @Override
-    public Management createManagement(Management management) {
-        String s="MT";
-        String t = String.valueOf(new Date().getTime()).substring(10, 13);
-        management.setMtId(s + UUID.randomUUID().toString().substring(0, 4) +t);
+    private CampusRepo camRepo;
 
-        Management storedManagement = managementRepo.save(management);
-        User user=userRepo.save(
-                new User(storedManagement.getMtId(),storedManagement.getMtName(),storedManagement.getMtPasswd(),storedManagement.getMtPasswd())
-        );
-        userRepo.save(user);
+    @Override
+    public Management createManagement(ManagementDto dto) {
+
+        Campus campus = camRepo.findById(dto.getCampusId())
+                .orElseThrow(() -> new ResourceNotFound("Campus Doesn't exist with this id" + dto.getCampusId()));
+
+        // ready the Management Object
+        Management mng = new Management();
+        String s = "MT";
+        String t = String.valueOf(new Date().getTime()).substring(10, 13).toUpperCase();
+        mng.setMtId(s + UUID.randomUUID().toString().substring(0, 4) + t);
+        mng.setMtName(dto.getMtName());
+        mng.setMtEmail(dto.getMtEmail());
+        mng.setMtPasswd(dto.getMtPasswd());
+        mng.setMtBloodGrup(dto.getMtBloodGrup());
+        mng.setMtGender(dto.getMtGender());
+        mng.setMtPhoto(dto.getMtPhoto());
+        mng.setCampus(campus);
+
+
+
+        // save Management Object
+        Management storedManagement = managementRepo.save(mng);
+
         return storedManagement;
     }
 
@@ -56,7 +75,7 @@ public class ManagementService implements ManagementMethods {
         storedManagement.setMtEmail(management.getMtEmail());
         storedManagement.setMtPasswd(management.getMtPasswd());
         storedManagement.setMtPhone(management.getMtPhone());
-        storedManagement.setUnPhoto(management.getUnPhoto());
+        storedManagement.setMtPhoto(management.getMtPhoto());
         managementRepo.save(storedManagement);
 
 

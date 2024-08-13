@@ -1,5 +1,6 @@
 package com.project.eduvance.Controllers;
 
+import com.project.eduvance.Dto.ManagementDto;
 import com.project.eduvance.Entity.Management;
 
 import com.project.eduvance.Service.ServiceImp.ManagementService;
@@ -19,7 +20,7 @@ public class ManagementController {
     private ManagementService managementService;
 
     @PostMapping
-    public ResponseEntity<Management> createManagement(@RequestBody Management management) {
+    public ResponseEntity<Management> createManagement(@RequestBody ManagementDto management) {
         Management createdMt = managementService.createManagement(management);
         return new ResponseEntity<>(createdMt, HttpStatus.CREATED);
     }
@@ -30,7 +31,7 @@ public class ManagementController {
         return new ResponseEntity<>(storedMt, HttpStatus.FOUND);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Management>> getManagements() {
         List<Management> allManagement = managementService.getAllManagement();
         return new ResponseEntity<>(allManagement, HttpStatus.FOUND);

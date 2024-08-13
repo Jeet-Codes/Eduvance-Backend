@@ -1,9 +1,7 @@
 package com.project.eduvance.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,10 +20,6 @@ public class Campus {
     @Id
     private String csId;
     private String csName;
-
-//    @ManyToOne
-//    private University university;
-
     private Integer csESTD;
     private String csState;
     private String csAddress;
@@ -34,8 +29,21 @@ public class Campus {
     @CreationTimestamp
     private LocalDateTime csDateOfJoin;
 
-    @Lob
-    private String unPhoto;
+    private String csPhoto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "university_id")
+    @JsonIgnore
+    private University university;
+
+    @OneToMany(mappedBy = "campus",cascade = CascadeType.PERSIST)
+    private List<Management> managements;
+
+    //when delete
+    public void deleteManagement(Management management) {
+        managements.remove(management);
+        management.setCampus(null);
+    }
 
 
 
