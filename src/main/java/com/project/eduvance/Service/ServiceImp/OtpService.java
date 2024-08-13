@@ -36,12 +36,13 @@ public class OtpService {
                 .createdAt(LocalDateTime.now())
                 .expiredAt(LocalDateTime.now().plusMinutes(5)) // expired at
                 .build());
+
         emailService.sendSimpleMail(EmailDetails.builder()
                 .subject("DO NOT DISCLOSE!!")
                 .recipient(otpRequest.getEmail())
-                .messageBody("The Otp for Reset the otp is: "+otp)
-
+                .otp(otp)
                 .build());
+
         return ResponseEntity.status(200).body("OTP sent successfully");
     }
 
