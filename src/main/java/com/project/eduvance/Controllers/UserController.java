@@ -25,10 +25,11 @@ public class UserController {
     }
 
 
-    @PostMapping()
-    public ResponseEntity<?>forgetPassword(@RequestBody User user) {  //
-        ApiResponse forgot = userMethods.forgot(user.getUserEmail(), user.getUserPasswd());
-        return ResponseEntity.ok(forgot);
+    @PostMapping("/update")
+    public ResponseEntity<ApiResponse>forgetPassword(@RequestParam("email") String email,
+                                           @RequestParam("password") String password) {  //
+        ApiResponse forgot = userMethods.forgot(email, password);
+        return new ResponseEntity<>(forgot, HttpStatus.OK);
 
     }
 }

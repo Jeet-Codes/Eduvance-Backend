@@ -47,10 +47,6 @@ public class UserService implements UserMethods {
         Optional<User> byUserEmail = userRepo.findByUserEmail(email);
         // OTP Verification
         if (byUserEmail.isPresent()) {
-
-
-
-
             User user = byUserEmail.get();
             user.setUserPasswd(password);
             User save = userRepo.save(user);
