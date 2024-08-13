@@ -45,8 +45,8 @@ public class CampusService implements CampusMethods {
         // create campus object
         Campus campus = new Campus();
         String s = "CS";
-        String t = String.valueOf(new Date().getTime()).substring(10, 13).toUpperCase();
-        campus.setCsId(s + UUID.randomUUID().toString().substring(0, 4) + t);
+        String t = String.valueOf(new Date().getTime()).substring(10, 13);
+        campus.setCsId(s + UUID.randomUUID().toString().substring(0, 4).toUpperCase() + t);
         campus.setCsName(resCampus.getCsName());
         campus.setCsAddress(resCampus.getCsAddress());
         campus.setCsESTD(resCampus.getCsESTD());

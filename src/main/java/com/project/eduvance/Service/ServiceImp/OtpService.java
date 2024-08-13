@@ -9,10 +9,12 @@ import com.project.eduvance.Utils.OtpGenerator;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -29,42 +31,44 @@ public class OtpService {
         String otp= OtpGenerator.generateOtp();
         log.info("OTP generated: {}",otp);
         otpRepo.save(Otp.builder()
-                        .email(otpRequest.getEmail())
-                        .otp(otp)
-                        .createdAt(LocalDateTime.now())
-                        .expiredAt(LocalDateTime.now().plusMinutes(5)) // expired at
+                .email(otpRequest.getEmail())
+                .otp(otp)
+                .createdAt(LocalDateTime.now())
+                .expiredAt(LocalDateTime.now().plusMinutes(5)) // expired at
                 .build());
         emailService.sendSimpleMail(EmailDetails.builder()
-                        .subject("DO NOT DISCLOSE!!")
-                        .recipient(otpRequest.getEmail())
-                        .messageBody("The Otp for Reset the otp is: "+otp)
+                .subject("DO NOT DISCLOSE!!")
+                .recipient(otpRequest.getEmail())
+                .messageBody("The Otp for Reset the otp is: "+otp)
 
                 .build());
         return ResponseEntity.status(200).body("OTP sent successfully");
-
     }
 
 
     public ResponseEntity<String> validateOtp(OtpValidate otpValidate) {
-        Otp otp= otpRepo.findByEmail(otpValidate.getEmail());
-        log.info("Email found: {}",otpValidate.getEmail());
-        if(otp == null){
-            return ResponseEntity.status(400)
-                    .body("You have not sent an otp");
+        List<Otp> otps = otpRepo.findByEmailSortedByDate(otpValidate.getEmail());
+
+        if (otps.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("OTP has not been sent for this email.");
         }
 
-        if(otp.getExpiredAt().isBefore(LocalDateTime.now())){
-            return ResponseEntity.status(400)
-                    .body("You have expired otp");
+        Otp otp = otps.get(0);
+
+        if (otp.getExpiredAt().isBefore(LocalDateTime.now())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("The OTP has expired.");
         }
 
-        if(!otp.getOtp().equals(otpValidate.getOtp())){
-            return ResponseEntity.status(400)
-                    .body("OTP is Invalid");
+        if (!otp.getOtp().equals(otpValidate.getOtp())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Invalid OTP.");
         }
 
-        return ResponseEntity.status(200).body("true");
+        return ResponseEntity.ok("OTP validated successfully.");
     }
+
 
 
 }
