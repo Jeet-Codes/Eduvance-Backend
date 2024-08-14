@@ -36,8 +36,8 @@ public class ManagementService implements ManagementMethods {
         // ready the Management Object
         Management mng = new Management();
         String s = "MT";
-        String t = String.valueOf(new Date().getTime()).substring(10, 13).toUpperCase();
-        mng.setMtId(s + UUID.randomUUID().toString().substring(0, 4) + t);
+        String t = String.valueOf(new Date().getTime()).substring(10, 13);
+        mng.setMtId(s + UUID.randomUUID().toString().substring(0, 4).toUpperCase() + t);
         mng.setMtName(dto.getMtName());
         mng.setMtEmail(dto.getMtEmail());
         mng.setMtPasswd(dto.getMtPasswd());

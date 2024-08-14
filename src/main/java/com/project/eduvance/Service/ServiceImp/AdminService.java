@@ -28,9 +28,9 @@ public class AdminService implements AdminMethods {
     @Override
     public Admin createAdmin(Admin admin) {
         String s = "AD";
-        String t = String.valueOf(new Date().getTime()).substring(10, 13).toUpperCase();
+        String t = String.valueOf(new Date().getTime()).substring(10, 13);
        
-        admin.setAdminId(s + UUID.randomUUID().toString().substring(0, 4) + t);
+        admin.setAdminId(s + UUID.randomUUID().toString().substring(0, 4).toUpperCase() + t);
         Admin savedAdmin = adminRepo.save(admin);
         User user1 = new User(savedAdmin.getAdminId(), savedAdmin.getAdminName(), savedAdmin.getAdminEmail(), savedAdmin.getAdminPasswd());
         userRepo.save(user1);

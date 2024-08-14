@@ -13,6 +13,7 @@ public class ManagementDto {
     private String mtName;
     private String mtEmail;
     private String mtPasswd;
+    private String mtPhone;
     private String mtGender;
     private String mtBloodGrup;
     private String mtPhoto;
