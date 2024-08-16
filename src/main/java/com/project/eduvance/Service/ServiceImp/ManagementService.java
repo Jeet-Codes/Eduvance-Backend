@@ -45,11 +45,17 @@ public class ManagementService implements ManagementMethods {
         mng.setMtGender(dto.getMtGender());
         mng.setMtPhoto(dto.getMtPhoto());
         mng.setCampus(campus);
-
-
-
         // save Management Object
         Management storedManagement = managementRepo.save(mng);
+
+        //Saving the Data in the User Database
+        User mtUser = User.builder()
+                .userId(storedManagement.getMtId())
+                .userName(storedManagement.getMtEmail())
+                .userPasswd(storedManagement.getMtPasswd())
+                .userEmail(storedManagement.getMtEmail())
+                .build();
+        userRepo.save(mtUser);
 
         return storedManagement;
     }
