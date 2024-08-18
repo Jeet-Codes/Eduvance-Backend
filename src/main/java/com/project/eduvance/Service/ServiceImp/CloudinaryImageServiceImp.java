@@ -19,7 +19,9 @@ public class CloudinaryImageServiceImp implements CloudinaryImageService {
     @Override
     public Map uploadImage(MultipartFile file) {
         try {
-            Map data = this.cloudinary.uploader().upload(file.getBytes(), Map.of());
+            Map data = this.cloudinary.uploader().upload(file.getBytes(),Map.of());
+            String name=data.get("url").toString();
+            System.out.println(name+"\n"+" This is the URL");
             return data;
         } catch (IOException e) {
             throw new RuntimeException("Image Upload Error");

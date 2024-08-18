@@ -4,14 +4,17 @@ import com.project.eduvance.Dto.ApiResponse;
 import com.project.eduvance.Dto.IdName;
 import com.project.eduvance.Entity.University;
 import com.project.eduvance.Repository.UniversityRepo;
+import com.project.eduvance.Service.CloudinaryImageService;
 import com.project.eduvance.Service.UniversityMethods;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -21,6 +24,9 @@ import java.util.stream.Collectors;
 public class UniversityService implements UniversityMethods {
     @Autowired
     private UniversityRepo universityRepo;
+
+    @Autowired
+    CloudinaryImageService cloudinaryImageService;
 
     @Override
     public University createUniversity(University university) {
@@ -35,7 +41,7 @@ public class UniversityService implements UniversityMethods {
     }
 
     @Override
-    public University updateUniversity(String unId, University university) {
+    public University updateUniversity(String unId, University university, MultipartFile image) {
         University storedUn = universityRepo.findById(unId).orElseThrow(
                 () -> new RuntimeException("university not found" + unId)
         );
@@ -45,6 +51,14 @@ public class UniversityService implements UniversityMethods {
         storedUn.setUnFaxNumber(university.getUnFaxNumber());
         storedUn.setUnPhoto(university.getUnPhoto());
         storedUn.setUnLandlineNumber(university.getUnLandlineNumber());
+
+        // Image Stored in Cloudinary
+
+        Map data = cloudinaryImageService.uploadImage(image);
+        String Url=data.get("url").toString();
+        storedUn.setUnPhoto(Url);
+
+
         return universityRepo.save(storedUn);
     }
 

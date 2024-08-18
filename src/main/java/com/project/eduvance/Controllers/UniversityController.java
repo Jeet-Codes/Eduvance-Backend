@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -35,8 +36,9 @@ public class UniversityController {
         return new ResponseEntity<>(uns, HttpStatus.OK);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<University> updateUniversity(@PathVariable String id,@RequestBody University un1) {
-        University updatedUn = universityService.updateUniversity(id, un1);
+    public ResponseEntity<University> updateUniversity(@PathVariable String id, @RequestBody University un1,
+                                                       @RequestParam("image") MultipartFile image) {
+        University updatedUn = universityService.updateUniversity(id, un1,image);
         return new ResponseEntity<>(updatedUn, HttpStatus.OK);
     }
 
