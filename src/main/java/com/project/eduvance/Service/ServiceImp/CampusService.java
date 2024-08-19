@@ -83,6 +83,7 @@ public class CampusService implements CampusMethods {
                 ()->new ResourceNotFound("Campus not found"+csId)
         );
         campusRepo.deleteById(csId);
+
     }
 
     @Override
