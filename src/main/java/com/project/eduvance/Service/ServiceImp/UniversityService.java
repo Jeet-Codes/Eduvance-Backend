@@ -41,7 +41,7 @@ public class UniversityService implements UniversityMethods {
     }
 
     @Override
-    public University updateUniversity(String unId, University university, MultipartFile image) {
+    public University updateUniversity(String unId, University university) {
         University storedUn = universityRepo.findById(unId).orElseThrow(
                 () -> new RuntimeException("university not found" + unId)
         );
@@ -54,9 +54,9 @@ public class UniversityService implements UniversityMethods {
 
         // Image Stored in Cloudinary
 
-        Map data = cloudinaryImageService.uploadImage(image);
-        String Url=data.get("url").toString();
-        storedUn.setUnPhoto(Url);
+//        Map data = cloudinaryImageService.uploadImage(image);
+//        String Url=data.get("url").toString();
+//        storedUn.setUnPhoto(Url);
 
 
         return universityRepo.save(storedUn);

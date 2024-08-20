@@ -36,9 +36,8 @@ public class UniversityController {
         return new ResponseEntity<>(uns, HttpStatus.OK);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<University> updateUniversity(@PathVariable String id, @RequestBody University un1,
-                                                       @RequestParam("image") MultipartFile image) {
-        University updatedUn = universityService.updateUniversity(id, un1,image);
+    public ResponseEntity<University> updateUniversity(@PathVariable String id, @RequestBody University un1) {
+        University updatedUn = universityService.updateUniversity(id, un1);
         return new ResponseEntity<>(updatedUn, HttpStatus.OK);
     }
 
