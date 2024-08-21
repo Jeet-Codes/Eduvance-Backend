@@ -6,5 +6,6 @@ import java.util.Map;
 
 public interface CloudinaryImageService {
 
-    public Map uploadImage(MultipartFile file);
+    Map uploadImage(MultipartFile file);
+    String userImageUpload(String id,Map data);
 }
