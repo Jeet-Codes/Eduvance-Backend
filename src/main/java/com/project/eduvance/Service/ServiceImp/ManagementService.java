@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -103,7 +104,7 @@ public class ManagementService implements ManagementMethods {
     }
 
     @Override
-    public List<Management> getAllManagement() {
-        return managementRepo.findAll();
+    public List<Map<String, String>> getAllManagement() {
+        return managementRepo.findAllManagementWithCampusName();
     }
 }

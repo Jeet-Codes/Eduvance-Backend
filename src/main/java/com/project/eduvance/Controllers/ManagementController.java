@@ -31,10 +31,10 @@ public class ManagementController {
         return new ResponseEntity<>(storedMt, HttpStatus.FOUND);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Management>> getManagements() {
-        List<Management> allManagement = managementService.getAllManagement();
-        return new ResponseEntity<>(allManagement, HttpStatus.FOUND);
+    @GetMapping
+    public ResponseEntity<List<?>> getManagements() {
+        List<?> allManagement = managementService.getAllManagement();
+        return new ResponseEntity<>(allManagement, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
