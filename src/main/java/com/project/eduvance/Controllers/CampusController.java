@@ -24,8 +24,8 @@ public class CampusController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Campus>> getAllCampus() {
-        List<Campus> campus=campusService.getAllCampus();
+    public ResponseEntity<List<?>> getAllCampus() {
+        List<?> campus=campusService.getAllCampus();
         return new ResponseEntity<>(campus, HttpStatus.OK);
     }
 

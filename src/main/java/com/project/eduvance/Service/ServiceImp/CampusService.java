@@ -13,10 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -87,9 +84,33 @@ public class CampusService implements CampusMethods {
     }
 
     @Override
-    public List<Campus> getAllCampus() {
-        return campusRepo.findAll();
+    public List<Map<String, String>> getAllCampus() {
+        List<Campus> campuses = campusRepo.findAll();
+        List<Map<String, String>> result = new ArrayList();
+
+        for (Campus campus : campuses) {
+            Map<String, String> campusData = new HashMap();
+            campusData.put("csId", campus.getCsId());
+            campusData.put("csName", campus.getCsName());
+            campusData.put("csESTD", campus.getCsESTD().toString());
+            campusData.put("csState", campus.getCsState());
+            campusData.put("csAddress", campus.getCsAddress());
+            campusData.put("csPhone", campus.getCsPhone());
+            campusData.put("csLandlineNumber", campus.getCsLandlineNumber());
+            campusData.put("csDateOfJoin", campus.getCsDateOfJoin().toString());
+            campusData.put("unPhoto", campus.getCsPhoto());
+
+
+//	            System.out.print(campus.getUniversity().getUnName());
+            campusData.put("universityName", campus.getUniversity().getUnName());
+
+            result.add(campusData);
+        }
+
+        return result;
+
     }
+
 
     @Override
     public Campus getCampus(String csId) {

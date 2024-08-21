@@ -13,7 +13,7 @@ public interface CampusMethods {
 
     void deleteCampus(String csId);
 
-    List<Campus> getAllCampus();
+    List<Map<String, String>> getAllCampus();
 
     Campus getCampus(String csId);
 
