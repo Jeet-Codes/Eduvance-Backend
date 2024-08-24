@@ -31,7 +31,7 @@ public class ManagementController {
         return new ResponseEntity<>(storedMt, HttpStatus.FOUND);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<?>> getManagements() {
         List<?> allManagement = managementService.getAllManagement();
         return new ResponseEntity<>(allManagement, HttpStatus.OK);
