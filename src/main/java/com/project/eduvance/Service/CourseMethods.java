@@ -16,6 +16,7 @@ public interface CourseMethods {
 
     List<Course> getCourses();
 
+    String deleteCourses();
 
 
 }

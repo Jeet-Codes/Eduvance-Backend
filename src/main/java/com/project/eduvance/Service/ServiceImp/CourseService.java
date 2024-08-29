@@ -66,4 +66,10 @@ public class CourseService implements CourseMethods {
     public List<Course> getCourses() {
         return courseRepo.findAll();
     }
+
+    @Override
+    public String deleteCourses() {
+        courseRepo.deleteAll();
+        return "Deleted all courses";
+    }
 }
