@@ -24,7 +24,7 @@ public class SchoolController {
 		return new ResponseEntity<SchoolDto>(scDto, HttpStatus.OK);
 	}
 
-	@GetMapping
+	@GetMapping("/all")
 	public List<School> getAllSchool() {
 
 		return schoolService.listSchool();
