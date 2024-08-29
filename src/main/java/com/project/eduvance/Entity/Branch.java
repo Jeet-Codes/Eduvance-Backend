@@ -1,8 +1,7 @@
 package com.project.eduvance.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,5 +22,9 @@ public class Branch {
     @Column(name = "bhDescription")
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "school_id")
+    @JsonIgnore
+    private School school;
 }
 

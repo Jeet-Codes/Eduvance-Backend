@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("admin/degree")
+@CrossOrigin("*")
 public class DegreeController {
 
     @Autowired

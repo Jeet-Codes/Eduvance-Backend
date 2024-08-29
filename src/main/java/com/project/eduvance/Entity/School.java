@@ -1,9 +1,6 @@
 package com.project.eduvance.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,21 +12,21 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-
 public class School {
     @Id
-    @Column(name = "bhId")
+    @Column(name = "schoolId")
     private String Id;
 
-    @Column(name = "bhName")
+    @Column(name = "schoolName")
     private String Name;
 
-    @Column(name = "bhDesc")
+    @Column(name = "schoolDesc")
     private String Description;
 
-    private Date insertedDate;
+//    private Date insertedDate;
 
-
+    @OneToMany(mappedBy = "school",cascade = CascadeType.ALL)
+    private List<Branch> branches;
 //    @OneToMany
 //    private List<Degree> degrees;
 }
