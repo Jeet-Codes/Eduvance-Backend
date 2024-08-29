@@ -14,5 +14,5 @@ public interface FacultyMethods {
 
     Faculty getFaculty(String id);
 
-    void deleteFaculty(String id);
+    String deleteFaculty(String id);
 }

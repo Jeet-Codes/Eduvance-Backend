@@ -5,9 +5,7 @@ import com.project.eduvance.Entity.Campus;
 import com.project.eduvance.Entity.Management;
 import com.project.eduvance.Entity.University;
 import com.project.eduvance.Exception.ResourceNotFound;
-import com.project.eduvance.Repository.CampusRepo;
-import com.project.eduvance.Repository.ManagementRepo;
-import com.project.eduvance.Repository.UniversityRepo;
+import com.project.eduvance.Repository.*;
 import com.project.eduvance.Service.CloudinaryImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +28,12 @@ public class CloudinaryImageServiceImp implements CloudinaryImageService {
 
     @Autowired
     private CampusRepo campusRepo;
+
+    @Autowired
+    private FacultyRepo facultyRepo;
+
+    @Autowired
+    private StudentRepo studentRepo;
 
 
 

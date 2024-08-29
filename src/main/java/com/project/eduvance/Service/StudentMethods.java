@@ -12,7 +12,7 @@ public interface StudentMethods {
 
     Student getStudent(String id);
 
-    void deleteStudent(String id);
+    String deleteStudent(String id);
 
     List<Student> getStudents();
 }
