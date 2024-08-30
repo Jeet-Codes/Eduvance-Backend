@@ -1,12 +1,10 @@
 package com.project.eduvance.Service.ServiceImp;
 
 
-import com.project.eduvance.Entity.Admin;
+import com.project.eduvance.Entity.*;
 import com.project.eduvance.Dto.ApiResponse;
-import com.project.eduvance.Entity.User;
 import com.project.eduvance.Exception.ResourceNotFound;
-import com.project.eduvance.Repository.AdminRepo;
-import com.project.eduvance.Repository.UserRepo;
+import com.project.eduvance.Repository.*;
 import com.project.eduvance.Service.UserMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,14 +17,14 @@ public class UserService implements UserMethods {
     @Autowired
     private UserRepo userRepo;
 //
-//    @Autowired
-//    private StudentRepo studentRepo;
-//
-//    @Autowired
-//    private FacultyRepo facultyRepo;
-//
-//    @Autowired
-//    private MangementRepo mangementRepo;
+    @Autowired
+    private StudentRepo studentRepo;
+
+    @Autowired
+    private FacultyRepo facultyRepo;
+
+    @Autowired
+    private ManagementRepo managementRepo;
 
     @Autowired
     private AdminRepo adminRepo;
@@ -53,35 +51,42 @@ public class UserService implements UserMethods {
             String userId = save.getUserId();
             String substring = userId.substring(0, 2);
 //            System.out.println(substring);
-//            if(substring.equals("ST")) {
-//                Student stud = studentRepo.findById(userId).orElseThrow(
-//                        ()->new ResourceNotFound("Student","id",userId));
-//                stud.setStPasswd(save.getUserPasswd());
-//                studentRepo.save(stud);
-//            }else if(substring.equals("FT")){
-//                Faculty find=facultyRepo.findById(userId).orElseThrow(
-//                        ()->new ResourceNotFound("Faculty","id",userId));
-////                System.out.println(find);
-//                find.setFacultyPasswd(save.getUserPasswd());
-//                facultyRepo.save(find);
-//            }else if(substring.equals("MT")){
-//                Management find=mangementRepo.findById(userId).orElseThrow(
-//                        ()->new ResourceNotFound("Management","id",userId));
-//                find.setMtPasswd(save.getUserPasswd());
-//                mangementRepo.save(find);
-//            }else{
-//                Admin find=adminRepo.findById(userId).orElseThrow(
-//                        ()->new ResourceNotFound("Admin","id",userId));
-//                find.setAdminPasswd(save.getUserPasswd());
-//                adminRepo.save(find);
-//            }
-            if(substring.equals("AD")) {
-                Admin find=adminRepo.findById(userId).orElseThrow(
-                        ()->new ResourceNotFound("Admin","id",userId));
-                find.setAdminPasswd(save.getUserPasswd());
-                adminRepo.save(find);
+
+//            if(substring.equals("AD")) {
+////                Admin find=adminRepo.findById(userId).orElseThrow(
+////                        ()->new ResourceNotFound("Admin","id",userId));
+////                find.setAdminPasswd(save.getUserPasswd());
+////                adminRepo.save(find);
+////            }
+            switch (substring) {
+                case "ST" -> {
+                    Student stud = studentRepo.findById(userId).orElseThrow(
+                            () -> new ResourceNotFound("Student", "id", userId));
+                    stud.setPassword(save.getUserPasswd());
+                    studentRepo.save(stud);
+                }
+                case "FT" -> {
+                    Faculty find = facultyRepo.findById(userId).orElseThrow(
+                            () -> new ResourceNotFound("Faculty", "id", userId));
+//                System.out.println(find);
+                    find.setPassword(save.getUserPasswd());
+                    facultyRepo.save(find);
+                }
+                case "MT" -> {
+                    Management find = managementRepo.findById(userId).orElseThrow(
+                            () -> new ResourceNotFound("Management", "id", userId));
+                    find.setMtPasswd(save.getUserPasswd());
+                    managementRepo.save(find);
+                }
+                default -> {
+                    Admin find = adminRepo.findById(userId).orElseThrow(
+                            () -> new ResourceNotFound("Admin", "id", userId));
+                    find.setAdminPasswd(save.getUserPasswd());
+                    adminRepo.save(find);
+                }
+
             }
-            return new ApiResponse("Updated Successfully", true, HttpStatus.ACCEPTED, save);
+           return new ApiResponse("Updated Successfully", true, HttpStatus.ACCEPTED, save);
         } else {
             ApiResponse userNotPresent = ApiResponse.builder()
                     .message("user not present")
@@ -98,12 +103,34 @@ public class UserService implements UserMethods {
             User user = byUserEmail.get();
             String userId = user.getUserId();
             String substring = userId.substring(0, 2);
-            if(substring.equals("AD")) {
-                Admin find=adminRepo.findById(userId).orElseThrow(
-                        ()->new ResourceNotFound("Admin","id",userId));
+            switch (substring) {
+                case "AD" -> {
+                    Admin find = adminRepo.findById(userId).orElseThrow(
+                            () -> new ResourceNotFound("Admin", "id", userId));
 
-                return !find.getAdminEmail().isBlank();
+                    return !find.getAdminEmail().isBlank();
+                }
+                case "MT" -> {
+                    Management find = managementRepo.findById(userId).orElseThrow(
+                            () -> new ResourceNotFound("Management", "id", userId)
+                    );
+                    return !find.getMtEmail().isBlank();
+                }
+                case "ST" -> {
+                    Student find = studentRepo.findById(userId).orElseThrow(
+                            () -> new ResourceNotFound("Student", "id", userId)
+                    );
+                    return !find.getEmail().isBlank();
+
+                }
+                default -> {
+                    Faculty find = facultyRepo.findById(userId).orElseThrow(
+                            () -> new ResourceNotFound("Faculty", "id", userId)
+                    );
+                    return !find.getEmail().isBlank();
+                }
             }
+
         }
         return false;
     }
