@@ -20,7 +20,7 @@ public class CourseService implements CourseMethods {
     @Override
     public Course addCourse(Course course) {
 
-        String s = "CE";
+        String s = "CR";
         String t = String.valueOf(new Date().getTime()).substring(10, 13);
         course.setId(s+ UUID.randomUUID().toString().substring(0,4)+t);
 

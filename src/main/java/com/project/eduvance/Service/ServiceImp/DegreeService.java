@@ -7,7 +7,10 @@ import com.project.eduvance.Service.DegreeMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
 @Service
 public class DegreeService implements DegreeMethods
 {
@@ -17,8 +20,12 @@ public class DegreeService implements DegreeMethods
 
     @Override
     public Degree createDegree(Degree degree) {
-        Degree save = degreeRepo.save(degree);
-        return save;
+        String s = "DG";
+        String t = String.valueOf(new Date().getTime()).substring(10, 13);
+        degree.setId(s+ UUID.randomUUID().toString().substring(0,4).toUpperCase()+t);
+        Degree storedDegree = degreeRepo.save(degree);
+
+        return storedDegree;
     }
 
     @Override

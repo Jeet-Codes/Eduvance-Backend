@@ -1,8 +1,10 @@
 package com.project.eduvance.Service.ServiceImp;
 
 import com.project.eduvance.Entity.Student;
+import com.project.eduvance.Entity.User;
 import com.project.eduvance.Exception.ResourceNotFound;
 import com.project.eduvance.Repository.StudentRepo;
+import com.project.eduvance.Repository.UserRepo;
 import com.project.eduvance.Service.StudentMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,14 +20,26 @@ public class StudentService implements StudentMethods {
     @Autowired
     private StudentRepo studentRepo;
 
+    @Autowired
+    private UserRepo userRepo;
+
     @Override
     public Student addStudent(Student student) {
         String s = "ST";
         String t = String.valueOf(new Date().getTime()).substring(10, 13);
         student.setId(s+ UUID.randomUUID().toString().substring(0,4)+t);
-        Student save = studentRepo.save(student);
+        Student storedStudent = studentRepo.save(student);
 
-        return save;
+        User stUser=User.builder()
+                .userId(storedStudent.getId())
+                .userName(storedStudent.getFirstName()+" "+storedStudent.getLastName())
+                .userEmail(storedStudent.getEmail())
+                .userPasswd(storedStudent.getPassword())
+                .build();
+
+        userRepo.save(stUser);
+
+        return storedStudent;
     }
 
     @Override

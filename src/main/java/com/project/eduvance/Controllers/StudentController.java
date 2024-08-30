@@ -25,7 +25,7 @@ public class StudentController {
         return new ResponseEntity<>(stored, HttpStatus.OK);
     }
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable String id) {
         Student stored = studentService.getStudent(id);
         return new ResponseEntity<>(stored, HttpStatus.OK);
