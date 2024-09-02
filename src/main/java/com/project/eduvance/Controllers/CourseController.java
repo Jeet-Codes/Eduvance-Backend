@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("eduvance/course")
+@RequestMapping("/eduvance/course")
 @CrossOrigin("*")
 public class CourseController {
 
