@@ -42,6 +42,7 @@ public class ManagementService implements ManagementMethods {
         mng.setMtName(dto.getMtName());
         mng.setMtEmail(dto.getMtEmail());
         mng.setMtPasswd(dto.getMtPasswd());
+        mng.setMtPhone(dto.getMtPhone());
         mng.setMtBloodGrup(dto.getMtBloodGrup());
         mng.setMtGender(dto.getMtGender());
         mng.setMtPhoto(dto.getMtPhoto());
