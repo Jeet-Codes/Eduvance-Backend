@@ -1,9 +1,8 @@
 package com.project.eduvance.Entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,4 +30,10 @@ public class Course {
 
     @Column(name = "ceCredit")
     private Integer credit;
+
+    @ManyToOne
+    @JoinColumn(name = "degree_id")
+    @JsonIgnore
+    private Degree degree;
+
 }

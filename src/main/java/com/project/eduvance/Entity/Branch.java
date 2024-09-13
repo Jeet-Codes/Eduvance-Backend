@@ -19,7 +19,7 @@ public class Branch {
     @Column(name = "bhName")
     private String name;
 
-    @Column(name = "bhDescription")
+    @Column(name = "bhDesc")
     private String description;
 
     @ManyToOne

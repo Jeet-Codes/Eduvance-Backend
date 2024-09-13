@@ -1,5 +1,6 @@
 package com.project.eduvance.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,10 +24,11 @@ public class School {
     @Column(name = "schoolDesc")
     private String Description;
 
-//    private Date insertedDate;
-
-    @OneToMany(mappedBy = "school",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL)
     private List<Branch> branches;
-//    @OneToMany
-//    private List<Degree> degrees;
+
+    @ManyToOne
+    @JoinColumn(name = "degree_id") //unidirectional
+    @JsonIgnore
+    private Degree degree;
 }

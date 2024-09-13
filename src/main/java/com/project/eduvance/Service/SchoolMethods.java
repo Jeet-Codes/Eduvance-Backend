@@ -7,5 +7,8 @@ import com.project.eduvance.Entity.School;
 
 public interface SchoolMethods {
    SchoolDto addSchool(SchoolDto school);
+
+   School addSchoolWithDegree(SchoolDto school, String id);
+
    List<School> listSchool();
 }

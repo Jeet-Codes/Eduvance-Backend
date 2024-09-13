@@ -31,4 +31,10 @@ public class SchoolController {
 
 	}
 
+
+	@PostMapping("/withDegree/{id}")
+	public ResponseEntity addSchoolWithDegree(@RequestBody SchoolDto schoolDto,@PathVariable String id) {
+		School added = schoolService.addSchoolWithDegree(schoolDto, id);
+		return new ResponseEntity(added,HttpStatus.OK);
+	}
 }

@@ -33,9 +33,9 @@ public class DegreeService implements DegreeMethods
         Degree degree1 = degreeRepo.findById(id).orElseThrow(
                 () -> new ResourceNotFound("Degree", "id", id)
         );
-        degree1.setName(degree.getName());
-        degree1.setDescription(degree.getDescription());
-        degree1.setDuration(degree.getDuration());
+//        degree1.setName(degree.getName());
+//        degree1.setDescription(degree.getDescription());
+//        degree1.setDuration(degree.getDuration());
 
         Degree saved = degreeRepo.save(degree1);
 
