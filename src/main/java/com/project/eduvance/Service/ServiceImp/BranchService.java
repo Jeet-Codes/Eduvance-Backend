@@ -1,10 +1,8 @@
 package com.project.eduvance.Service.ServiceImp;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
+import com.project.eduvance.Dto.List.BranchResponse;
 import com.project.eduvance.Repository.BranchRepo;
 import com.project.eduvance.Repository.SchoolRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +31,8 @@ public class BranchService implements BranchMethods {
 
 		Branch branch = new Branch();
 		branch.setId(s + UUID.randomUUID().toString().substring(0, 4) + t);
-		branch.setName(branchDto.getBranchName());
-		branch.setDescription(branchDto.getBranchDesc());
+		branch.setName(branchDto.getName());
+		branch.setDescription(branchDto.getDesc());
 		branch.setSchool(school.get());
 		Branch br = branchRepository.save(branch);
 
@@ -42,8 +40,22 @@ public class BranchService implements BranchMethods {
 	}
 
 	@Override
-	public List<Branch> listBranch() {
+	public List<BranchResponse> listBranch() {
 		// TODO Auto-generated method stub
+		List<Branch> branches = branchRepository.findAll();
+		List<BranchResponse> branchResponses = new ArrayList<BranchResponse>();
+		for (Branch branch : branches) {
+			BranchResponse response = new BranchResponse();
+			response.setBranchId(branch.getId());
+			response.setBranchName(branch.getName());
+
+			// Add the mapped BranchResponse to the list
+			branchResponses.add(response);
+		}
+		return branchResponses;
+	}
+
+	public List<Branch> listBranches() {
 		return branchRepository.findAll();
 	}
 

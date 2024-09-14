@@ -1,6 +1,7 @@
 package com.project.eduvance.Controllers;
 
 
+import com.project.eduvance.Dto.List.FacultyResponse;
 import com.project.eduvance.Entity.Faculty;
 import com.project.eduvance.Service.ServiceImp.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,12 @@ public class FacultyController {
     public ResponseEntity<String> deleteFaculty(@PathVariable String id) {
         String delete = facultyService.deleteFaculty(id);
         return new ResponseEntity<>(delete, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/v2/all")
+    public ResponseEntity<List<FacultyResponse>> searchFaculty() {
+        List<FacultyResponse> facultiesV2 = facultyService.getFacultiesV2();
+        return new ResponseEntity<>(facultiesV2, HttpStatus.OK);
     }
 }

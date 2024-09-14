@@ -1,9 +1,8 @@
 package com.project.eduvance.Service.ServiceImp;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
+import com.project.eduvance.Dto.List.SchoolResponse;
 import com.project.eduvance.Entity.Degree;
 import com.project.eduvance.Exception.ResourceNotFound;
 import com.project.eduvance.Repository.DegreeRepo;
@@ -39,7 +38,7 @@ public class SchoolService implements SchoolMethods {
 	}
 
 	@Override
-	public School addSchoolWithDegree(SchoolDto school, String id) {
+	public Object addSchoolWithDegree(SchoolDto school, String id) {
 		String s = "SC";
 		String t = String.valueOf(new Date().getTime()).substring(10, 13);
 		School newSchool = new School();
@@ -56,14 +55,34 @@ public class SchoolService implements SchoolMethods {
 
 		School saved = schoolRepository.save(newSchool);
 
+		SchoolDto returnedSchool = new SchoolDto(saved.getId(), saved.getName(), saved.getDescription());
 
-		return saved;
+		return returnedSchool;
 	}
 
 	@Override
-	public List<School> listSchool() {
-		// TODO Auto-generated method stub
-		return schoolRepository.findAll();
+	public List<SchoolResponse> listSchool() {
+		// Fetch all schools from the repository
+		List<School> all = schoolRepository.findAll();
+
+		// Create a list to store the responses
+		List<SchoolResponse> schoolResponses = new ArrayList<>();
+
+		// Map each School entity to a SchoolResponse DTO
+		for (School school : all) {
+			SchoolResponse response = new SchoolResponse();
+			response.setId(school.getId());
+			response.setSchoolName(school.getName());
+
+			// You can map other fields if needed, like description or branches
+			// response.setDescription(school.getDescription());
+			// response.setBranches(school.getBranches()); // If branches are needed in the response
+
+			schoolResponses.add(response);
+		}
+
+		// Return the list of SchoolResponse objects
+		return schoolResponses;
 	}
 
 }

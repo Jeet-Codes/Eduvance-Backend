@@ -1,5 +1,6 @@
 package com.project.eduvance.Service.ServiceImp;
 
+import com.project.eduvance.Dto.List.FacultyResponse;
 import com.project.eduvance.Entity.Faculty;
 import com.project.eduvance.Entity.User;
 import com.project.eduvance.Exception.ResourceNotFound;
@@ -9,6 +10,7 @@ import com.project.eduvance.Service.FacultyMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -55,6 +57,28 @@ public class FacultyService implements FacultyMethods {
     public List<Faculty> getFaculties() {
         return facultyRepo.findAll();
     }
+
+    public List<FacultyResponse> getFacultiesV2() {
+        List<Faculty> faculties = facultyRepo.findAll();
+
+        // Create a list to store the FacultyResponse objects
+        List<FacultyResponse> facultyResponses = new ArrayList<>();
+
+        // Map each Faculty entity to a FacultyResponse DTO
+        for (Faculty faculty : faculties) {
+            FacultyResponse response = new FacultyResponse();
+            response.setName(faculty.getFirstName() + " " + faculty.getLastName()); // Concatenate first and last name
+            response.setEmail(faculty.getEmail());
+
+            // Add the mapped FacultyResponse to the list
+            facultyResponses.add(response);
+        }
+
+        // Return the list of FacultyResponse objects
+        return facultyResponses;
+
+    }
+
 
     @Override
     public Faculty getFaculty(String id) {

@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SchoolDto {
+    private String id;
     private String schoolName;
     private String schoolDescription;
+
+    public SchoolDto(String name, String description) {
+    }
 }

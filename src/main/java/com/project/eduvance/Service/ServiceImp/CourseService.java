@@ -1,5 +1,6 @@
 package com.project.eduvance.Service.ServiceImp;
 
+import com.project.eduvance.Dto.List.CourseResponse;
 import com.project.eduvance.Entity.Course;
 import com.project.eduvance.Exception.ResourceNotFound;
 import com.project.eduvance.Repository.CourseRepo;
@@ -7,6 +8,7 @@ import com.project.eduvance.Service.CourseMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -65,6 +67,19 @@ public class CourseService implements CourseMethods {
     @Override
     public List<Course> getCourses() {
         return courseRepo.findAll();
+    }
+
+
+    public List<CourseResponse> getCoursesV2() {
+        List<Course> courses = courseRepo.findAll();
+        List<CourseResponse> courseResponses = new ArrayList<>();
+        for (Course course : courses) {
+            CourseResponse courseResponse = new CourseResponse();
+            courseResponse.setId(course.getId());
+            courseResponse.setName(course.getName());
+            courseResponses.add(courseResponse);
+        }
+        return courseResponses;
     }
 
     @Override

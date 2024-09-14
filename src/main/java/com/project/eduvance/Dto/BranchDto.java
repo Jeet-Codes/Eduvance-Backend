@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BranchDto {
-	private String branchName;
-	private String branchDesc;
+	private String name;
+	private String desc;
 	private String schoolId;
 
 }

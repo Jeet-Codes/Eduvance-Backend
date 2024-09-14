@@ -1,5 +1,6 @@
 package com.project.eduvance.Service.ServiceImp;
 
+import com.project.eduvance.Dto.List.StudentResponse;
 import com.project.eduvance.Entity.Student;
 import com.project.eduvance.Entity.User;
 import com.project.eduvance.Exception.ResourceNotFound;
@@ -9,6 +10,7 @@ import com.project.eduvance.Service.StudentMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -75,5 +77,29 @@ public class StudentService implements StudentMethods {
     @Override
     public List<Student> getStudents() {
         return List.of();
+    }
+
+    public List<StudentResponse> getStudentsV2(){
+
+        List<Student> students = studentRepo.findAll();
+
+        // Create a list to store the StudentResponse objects
+        List<StudentResponse> studentResponses = new ArrayList<>();
+
+        // Map each Student entity to a StudentResponse DTO
+        for (Student student : students) {
+            StudentResponse response = new StudentResponse();
+//            response.setStudentId(student.getStudentId());
+            response.setName(student.getFirstName() + " " + student.getLastName()); // Concatenate firstName and lastName
+            response.setEmail(student.getEmail());
+
+            // Add the mapped StudentResponse to the list
+            studentResponses.add(response);
+        }
+
+        // Return the list of StudentResponse objects
+        return studentResponses;
+
+
     }
 }

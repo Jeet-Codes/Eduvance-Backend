@@ -1,6 +1,7 @@
 package com.project.eduvance.Controllers;
 
 
+import com.project.eduvance.Dto.List.StudentResponse;
 import com.project.eduvance.Entity.Student;
 import com.project.eduvance.Service.ServiceImp.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +43,13 @@ public class StudentController {
         String deleteStudent = studentService.deleteStudent(id);
         return new ResponseEntity<>(deleteStudent, HttpStatus.OK);
     }
+
+
+    @GetMapping("/v2/all")
+    public ResponseEntity<List<StudentResponse>> getAllStudentv2() {
+        List<StudentResponse> students = studentService.getStudentsV2();
+        return new ResponseEntity<>(students, HttpStatus.OK);
+    }
+
+
 }

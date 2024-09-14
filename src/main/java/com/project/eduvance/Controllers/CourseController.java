@@ -1,5 +1,6 @@
 package com.project.eduvance.Controllers;
 
+import com.project.eduvance.Dto.List.CourseResponse;
 import com.project.eduvance.Entity.Course;
 import com.project.eduvance.Service.ServiceImp.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,4 +49,12 @@ public class CourseController {
         String deleteCourses = courseService.deleteCourses();
         return new ResponseEntity<>(deleteCourses, HttpStatus.OK);
     }
+
+    @GetMapping("/v2/all")
+    public ResponseEntity<List<CourseResponse>> getAllCoursesV2() {
+        List<CourseResponse> courses = courseService.getCoursesV2();
+        return new ResponseEntity<>(courses, HttpStatus.OK);
+    }
+
+
 }
