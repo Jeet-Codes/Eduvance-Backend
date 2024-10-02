@@ -1,5 +1,6 @@
 package com.project.eduvance.Controllers;
 
+import com.project.eduvance.Dto.LoginMtResponse;
 import com.project.eduvance.Dto.ManagementDto;
 import com.project.eduvance.Entity.Management;
 
@@ -25,10 +26,16 @@ public class ManagementController {
         return new ResponseEntity<>(createdMt, HttpStatus.CREATED);
     }
 
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Management> getManagement(@PathVariable String id) {
+//        Management storedMt = managementService.getManagement(id);
+//        return new ResponseEntity<>(storedMt, HttpStatus.FOUND);
+//    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Management> getManagement(@PathVariable String id) {
-        Management storedMt = managementService.getManagement(id);
-        return new ResponseEntity<>(storedMt, HttpStatus.FOUND);
+    public ResponseEntity<LoginMtResponse> getManagementDetails(@PathVariable String id) {
+        LoginMtResponse loginMt = managementService.getLoginMt(id);
+        return new ResponseEntity<>(loginMt, HttpStatus.FOUND);
     }
 
     @GetMapping("/all")
@@ -48,4 +55,7 @@ public class ManagementController {
         managementService.deleteManagement(id);
         return new ResponseEntity<>("Management having id: "+id+" deleted Successfully !",HttpStatus.FOUND);
     }
+
+
+
 }

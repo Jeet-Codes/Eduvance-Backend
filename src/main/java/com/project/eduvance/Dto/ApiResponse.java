@@ -17,10 +17,21 @@ public class ApiResponse {
     private User user;
 
 
+
     public ApiResponse(String message, HttpStatus status) {
         this.message = message;
         this.status = status;
     }
+
+
+    public ApiResponse(String message, HttpStatus status, User user) {
+        this.message = message;
+        this.status = status;
+        this.user = user;
+    }
+
+
 }
+
 
 

@@ -1,5 +1,6 @@
 package com.project.eduvance.Service.ServiceImp;
 
+import com.project.eduvance.Dto.LoginMtResponse;
 import com.project.eduvance.Dto.ManagementDto;
 import com.project.eduvance.Entity.Campus;
 import com.project.eduvance.Entity.Management;
@@ -104,8 +105,33 @@ public class ManagementService implements ManagementMethods {
 
     }
 
+
+
+
     @Override
     public List<Map<String, String>> getAllManagement() {
         return managementRepo.findAllManagementWithCampusName();
+    }
+
+    @Override
+    public LoginMtResponse getLoginMt(String mtId) {
+        Management management = managementRepo.findById(mtId).orElseThrow(
+                () -> new ResourceNotFound("Management not found", "id", mtId)
+        );
+        LoginMtResponse loginMtResponse = new LoginMtResponse();
+        loginMtResponse.setMtName(management.getMtName());
+        loginMtResponse.setMtEmail(management.getMtEmail());
+        loginMtResponse.setMtPasswd(management.getMtPasswd());
+        loginMtResponse.setMtPhone(management.getMtPhone());
+        loginMtResponse.setMtPhoto(management.getMtPhoto());
+        loginMtResponse.setMtPhone(management.getMtPhone());
+        loginMtResponse.setMtBloodGrup(management.getMtBloodGrup());
+        loginMtResponse.setMtGender(management.getMtGender());
+        loginMtResponse.setCampusId(management.getCampus().getCsId());
+        loginMtResponse.setCampusName(management.getCampus().getCsName());
+        loginMtResponse.setUnId(management.getCampus().getUniversity().getUnId());
+        loginMtResponse.setUnName(management.getCampus().getUniversity().getUnName());
+        return loginMtResponse;
+
     }
 }
