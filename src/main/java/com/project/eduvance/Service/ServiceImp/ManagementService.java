@@ -53,7 +53,7 @@ public class ManagementService implements ManagementMethods {
         //Saving the Data in the User Database
         User mtUser = User.builder()
                 .userId(storedManagement.getMtId())
-                .userName(storedManagement.getMtEmail())
+                .userName(storedManagement.getMtName())
                 .userPasswd(storedManagement.getMtPasswd())
                 .userEmail(storedManagement.getMtEmail())
                 .build();
