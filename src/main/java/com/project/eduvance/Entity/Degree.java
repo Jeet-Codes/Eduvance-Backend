@@ -22,6 +22,7 @@ public class Degree {
     private String id;
     private String degreeName;
     private String degreeShortName;
+    private Integer durationYears;
     private Date start;
     private Date end;
 
