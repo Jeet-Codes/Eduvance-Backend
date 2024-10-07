@@ -24,12 +24,6 @@ public class ApiResponse {
     }
 
 
-    public ApiResponse(String message, HttpStatus status, User user) {
-        this.message = message;
-        this.status = status;
-        this.user = user;
-    }
-
 
 }
 
