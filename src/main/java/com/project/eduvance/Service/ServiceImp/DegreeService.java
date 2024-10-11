@@ -1,7 +1,10 @@
 package com.project.eduvance.Service.ServiceImp;
 
+import com.project.eduvance.Dto.DegreeDto;
+import com.project.eduvance.Entity.Campus;
 import com.project.eduvance.Entity.Degree;
 import com.project.eduvance.Exception.ResourceNotFound;
+import com.project.eduvance.Repository.CampusRepo;
 import com.project.eduvance.Repository.DegreeRepo;
 import com.project.eduvance.Service.DegreeMethods;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +21,31 @@ public class DegreeService implements DegreeMethods
     @Autowired
     private DegreeRepo degreeRepo;
 
+    @Autowired
+    private CampusRepo campusRepo;
+
     @Override
-    public Degree createDegree(Degree degree) {
+    public Degree createDegree(DegreeDto degree) {
         String s = "DG";
         String t = String.valueOf(new Date().getTime()).substring(10, 13);
         degree.setId(s+ UUID.randomUUID().toString().substring(0,4).toUpperCase()+t);
-        Degree storedDegree = degreeRepo.save(degree);
 
-        return storedDegree;
+        Campus campus = campusRepo.findById(degree.getCampus_id()).orElseThrow(
+                () -> new ResourceNotFound("Id", "Campus is not found", degree.getCampus_id())
+        );
+
+
+
+        Degree storedDegree =new Degree();
+        storedDegree.setCampus(campus);
+        storedDegree.setId(degree.getId());
+        storedDegree.setDegreeName(degree.getDegreeName());
+        storedDegree.setDurationYears(degree.getDurationYears());
+        storedDegree.setDegreeShortName(degree.getDegreeShortName());
+
+        Degree saved = degreeRepo.save(storedDegree);
+
+        return saved;
     }
 
     @Override

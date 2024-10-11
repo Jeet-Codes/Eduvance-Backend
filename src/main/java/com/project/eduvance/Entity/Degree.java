@@ -1,8 +1,6 @@
 package com.project.eduvance.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +24,9 @@ public class Degree {
     private Date start;
     private Date end;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "campus_id") // Foreign key reference to Campus
+    private Campus campus;
 
 
 }

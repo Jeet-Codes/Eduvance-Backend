@@ -1,5 +1,6 @@
 package com.project.eduvance.Controllers;
 
+import com.project.eduvance.Dto.DegreeDto;
 import com.project.eduvance.Entity.Degree;
 import com.project.eduvance.Service.ServiceImp.DegreeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class DegreeController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<Degree> addDegree(@RequestBody Degree degree){
+    public ResponseEntity<Degree> addDegree(@RequestBody DegreeDto degree){
         Degree saved = degreeService.createDegree(degree);
         return new ResponseEntity<>(saved, HttpStatus.OK);
     }

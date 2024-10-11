@@ -1,5 +1,6 @@
 package com.project.eduvance.Service;
 
+import com.project.eduvance.Dto.DegreeDto;
 import com.project.eduvance.Entity.Degree;
 import org.springframework.stereotype.Service;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 public interface DegreeMethods {
 
-    Degree createDegree(Degree degree);
+    Degree createDegree(DegreeDto degreeDto);
 
     Degree updateDegree(String id,Degree degree);
 
