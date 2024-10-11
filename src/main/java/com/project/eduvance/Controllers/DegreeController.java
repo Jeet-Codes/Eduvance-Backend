@@ -51,5 +51,15 @@ public class DegreeController {
     }
 
 
+    @GetMapping("/campus/{campusId}")
+    public ResponseEntity<List<Degree>> getDegreesByCampusId(@PathVariable String campusId) {
+        List<Degree> degrees = degreeService.getAllDegreesByCampusId(campusId);
+        if (degrees.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(degrees, HttpStatus.OK);
+    }
+
+
 
 }

@@ -86,4 +86,9 @@ public class DegreeService implements DegreeMethods
         degreeRepo.deleteById(id);
 
     }
+
+    @Override
+    public List<Degree> getAllDegreesByCampusId(String campusId) {
+        return degreeRepo.findByCampusCsId(campusId);
+    }
 }

@@ -36,14 +36,19 @@ public class Campus {
     @JsonIgnore
     private University university;
 
+    @OneToMany(mappedBy = "campus")
+    private List<Degree> degrees;
+
     @OneToMany(mappedBy = "campus",cascade = CascadeType.PERSIST)
     private List<Management> managements;
 
     //when delete
-    public void deleteManagement(Management management) {
-        managements.remove(management);
-        management.setCampus(null);
-    }
+//    public void deleteManagement(Management management) {
+//        managements.remove(management);
+//        management.setCampus(null);
+//    }
+
+
 
 
 

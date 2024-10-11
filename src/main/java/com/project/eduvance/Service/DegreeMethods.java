@@ -17,4 +17,6 @@ public interface DegreeMethods {
     List<Degree> getAllDegree();
 
     void deleteDegree(String id);
+
+    List<Degree> getAllDegreesByCampusId(String campusId);
 }

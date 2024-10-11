@@ -1,5 +1,6 @@
 package com.project.eduvance.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Degree {
     private Date start;
     private Date end;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campus_id") // Foreign key reference to Campus
     private Campus campus;
