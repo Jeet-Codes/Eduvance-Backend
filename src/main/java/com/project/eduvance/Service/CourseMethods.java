@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CourseMethods {
 
-    Course addCourse(Course course);
+    Course addCourse(String degreeId,Course course);
 
     Course getCourse(String id);
 
@@ -18,5 +18,5 @@ public interface CourseMethods {
 
     String deleteCourses();
 
-
+    List<Course> getCoursesByUniversityId(String universityId);
 }

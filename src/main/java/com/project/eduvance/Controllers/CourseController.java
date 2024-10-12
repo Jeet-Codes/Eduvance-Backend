@@ -18,9 +18,9 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @PostMapping
-    public ResponseEntity<Course> addCourse(@RequestBody Course course) {
-        Course stored = courseService.addCourse(course);
+    @PostMapping("/{degreeId}")
+    public ResponseEntity<Course> addCourse(@PathVariable String degreeId,@RequestBody Course course) {
+        Course stored = courseService.addCourse(degreeId,course);
         return new ResponseEntity<>(stored, HttpStatus.CREATED);
     }
 
@@ -54,6 +54,13 @@ public class CourseController {
     public ResponseEntity<List<CourseResponse>> getAllCoursesV2() {
         List<CourseResponse> courses = courseService.getCoursesV2();
         return new ResponseEntity<>(courses, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/byUnId/{universityId}")
+    public ResponseEntity<List<Course>> getCoursesByUniversityId(@PathVariable String universityId) {
+        List<Course> courses = courseService.getCoursesByUniversityId(universityId);
+        return ResponseEntity.ok(courses);
     }
 
 

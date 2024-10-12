@@ -2,8 +2,10 @@ package com.project.eduvance.Service.ServiceImp;
 
 import com.project.eduvance.Dto.List.CourseResponse;
 import com.project.eduvance.Entity.Course;
+import com.project.eduvance.Entity.Degree;
 import com.project.eduvance.Exception.ResourceNotFound;
 import com.project.eduvance.Repository.CourseRepo;
+import com.project.eduvance.Repository.DegreeRepo;
 import com.project.eduvance.Service.CourseMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +21,20 @@ public class CourseService implements CourseMethods {
     @Autowired
     private CourseRepo courseRepo;
 
+    @Autowired
+    private DegreeRepo degreeRepo;
+
     @Override
-    public Course addCourse(Course course) {
+    public Course addCourse(String degreeId,Course course) {
 
         String s = "CR";
         String t = String.valueOf(new Date().getTime()).substring(10, 13);
         course.setId(s+ UUID.randomUUID().toString().substring(0,4)+t);
+
+        // Adding the Degree in Course !
+        Degree degree = degreeRepo.findById(degreeId).orElseThrow(() ->
+                new RuntimeException("Degree not found"));
+        course.setDegree(degree);
 
         Course save = courseRepo.save(course);
         return save;
@@ -86,5 +96,11 @@ public class CourseService implements CourseMethods {
     public String deleteCourses() {
         courseRepo.deleteAll();
         return "Deleted all courses";
+    }
+
+
+    @Override
+    public List<Course> getCoursesByUniversityId(String universityId) {
+        return courseRepo.findCoursesByUniversityId(universityId);
     }
 }

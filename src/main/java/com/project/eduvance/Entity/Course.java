@@ -31,7 +31,7 @@ public class Course {
     @Column(name = "ceCredit")
     private Integer credit;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "degree_id")
     @JsonIgnore
     private Degree degree;
