@@ -39,5 +39,12 @@ public class BranchController {
 	}
 
 
+	@GetMapping("/byUnId/{universityId}")
+	public ResponseEntity<List<Branch>> getBranchesByUniversityId(@PathVariable String universityId) {
+		List<Branch> branches = branchService.getBranchesByUniversityId(universityId);
+		return ResponseEntity.ok(branches);
+	}
+
+
 
 }

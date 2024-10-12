@@ -55,6 +55,11 @@ public class BranchService implements BranchMethods {
 		return branchResponses;
 	}
 
+	@Override
+	public List<Branch> getBranchesByUniversityId(String universityId) {
+		return branchRepository.findBranchesByUniversityId(universityId);
+	}
+
 	public List<Branch> listBranches() {
 		return branchRepository.findAll();
 	}
