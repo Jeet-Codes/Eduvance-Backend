@@ -3,6 +3,7 @@ package com.project.eduvance.Controllers;
 import java.util.List;
 
 import com.project.eduvance.Dto.List.SchoolResponse;
+import com.project.eduvance.Entity.School;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,5 +37,12 @@ public class SchoolController {
 	public ResponseEntity addSchoolWithDegree(@RequestBody SchoolDto schoolDto,@PathVariable String id) {
 		Object added = schoolService.addSchoolWithDegree(schoolDto, id);
 		return new ResponseEntity(added,HttpStatus.OK);
+	}
+
+
+	@GetMapping("/byUn/{universityId}")
+	public ResponseEntity<List<School>> getSchoolsByUniversity(@PathVariable String universityId) {
+		List<School> schools = schoolService.getSchoolsByUniversityId(universityId);
+		return new ResponseEntity<>(schools, HttpStatus.OK);
 	}
 }

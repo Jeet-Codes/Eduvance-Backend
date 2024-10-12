@@ -31,4 +31,7 @@ public class School {
     @JoinColumn(name = "degree_id") //unidirectional
     @JsonIgnore
     private Degree degree;
+
+
+
 }

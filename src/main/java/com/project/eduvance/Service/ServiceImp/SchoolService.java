@@ -85,4 +85,10 @@ public class SchoolService implements SchoolMethods {
 		return schoolResponses;
 	}
 
+	@Override
+	public List<School> getSchoolsByUniversityId(String universityId) {
+
+		return schoolRepository.findSchoolsByUniversityId(universityId);
+	}
+
 }

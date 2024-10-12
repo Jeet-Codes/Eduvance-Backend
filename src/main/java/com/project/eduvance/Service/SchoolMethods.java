@@ -12,4 +12,8 @@ public interface SchoolMethods {
    Object addSchoolWithDegree(SchoolDto school, String id);
 
    List<SchoolResponse> listSchool();
+
+
+   // by unID get Schools
+   List<School> getSchoolsByUniversityId(String universityId);
 }
